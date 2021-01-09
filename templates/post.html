@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{{ post.title|capfirst }}</h2>
+    <p>{{ post.posted_by }}: {{ post.date }}</p>
+    <p>{{ post.text }}</p>
+<hr>
+    {% for comment in post.comment_set.all %}
+    <div>
+    <p>{{ comment.posted_by }}</p>
+    <p>{{ comment.text }}</p>
+    </div>
+    {% endfor %}
+{% endblock %}

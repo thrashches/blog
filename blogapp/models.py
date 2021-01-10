@@ -9,9 +9,19 @@ class Post(models.Model):
     text = models.TextField(verbose_name='post')
     posted_by = models.ForeignKey(User, verbose_name='author', on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now=True)
+    picture = models.ImageField(upload_to='post_pictures/', blank=True)
 
     def __str__(self):
         return '{}: {}'.format(self.posted_by, self.title)
+
+    def text_len(self):
+        return len(self.text)
+
+    def comments_quantity(self):
+        return self.comment_set.count()
+
+    def get_absolute_url(self):
+        pass ## TODO: После создания поста ты должен автоматически переходить по его url
 
 
 class Comment(models.Model):
